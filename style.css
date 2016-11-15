@@ -1,0 +1,67 @@
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+
+header {
+    background-color: #00094c;
+    text-align: center;
+    color:#ffffff;
+}
+
+#stats {
+    background-color: #002eff;
+    #border-radius: 8px;
+    color:#ffffff;
+    padding:1%;
+}
+
+#game-area {
+    background-color: #2da7ff;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content: space-around;
+    align-items: center;
+    align-content: flex-start;
+}
+
+.stat-heading {
+    font-size: 5vw;
+}
+
+.label {
+    font-size: 3.5vw;
+}
+
+.value {
+    font-size: 2.5vw;
+}
+
+img {
+    width:100px;
+    height:150px;
+}
+
+.card {
+    display:inline-block;
+    position:relative;
+    min-width:100px;
+    min-height:150px;
+    margin: 2% 0;
+}
+
+.front, .back {
+    position:absolute;
+    margin:auto;
+}
+
+#logo {
+    width:100px;
+    height:100px;
+    overflow:hidden;
+    padding:0;
+}
+
+#logo img {
+    position:relative;
+    bottom:25%;
+}
