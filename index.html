@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Memory Match</title>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="http://learning-fuze.github.io/memory_match/v0.1/script.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+    <div class="container">
+        <div class="row">
+            <div id="logo" class="col-xs-4">
+                <img src="images/match_back.png" alt="">
+            </div>
+            <div class="col-xs-8">
+                <h1>FF Match</h1>
+            </div>
+        </div>
+        <div class="row">
+            <a href="#">Setting</a>
+            <a href="about.html">About</a>
+        </div>
+    </div>
+</header>
+<section class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-2" id="stats">
+            <h2 class="stat-heading">Stats</h2>
+            <div class="games-played">
+                <p class="label">Games Played</p>
+                <p class="value"></p>
+            </div>
+            <h2 class="stat-heading">Attempts</h2>
+            <div class="attempts">
+                <p class="label">attempts</p>
+                <p class="value"></p>
+            </div>
+            <h2 class="stat-heading">Accuracy</h2>
+            <div class="accuracy">
+                <p class="label">Accuracy</p>
+                <p class="value"></p>
+            </div>
+            <button class="reset btn btn-danger">Reset Game</button>
+        </div>
+        <div class="col-xs-12 col-sm-10" id="game-area">
+            <div class="card">
+                <div class="front">
+                    <img src="images/match_terra.png" alt="">
+                </div>
+                <div class="back">
+                    <img src="images/match_back.png" alt="">
+                </div>
+            </div>
+            <div class="card">
+                <div class="front">
+                    <img src="images/match_auron.png" alt="">
+                </div>
+                <div class="back">
+                    <img src="images/match_back.png" alt="">
+                </div>
+            </div>
+            <div class="card">
+                <div class="front">
+                    <img src="images/match_cloud.png" alt="">
+                </div>
+                <div class="back">
+                    <img src="images/match_back.png" alt="">
+                </div>
+            </div>
+            <div class="card">
+                <div class="front">
+                    <img src="images/match_kefca.png" alt="">
+                </div>
+                <div class="back">
+                    <img src="images/match_back.png" alt="">
+                </div>
+            </div>
+            <div class="card">
+                <div class="front">
+                    <img src="images/match_sephiroth.png" alt="">
+                </div>
+                <div class="back">
+                    <img src="images/match_back.png" alt="">
+                </div>
+            </div>
+            <div class="card">
+                <div class="front">
+                    <img src="images/match_squall.png" alt="">
+                </div>
+                <div class="back">
+                    <img src="images/match_back.png" alt="">
+                </div>
+            </div>
+            <div class="card">
+                <div class="front">
+                    <img src="images/match_tidus.png" alt="">
+                </div>
+                <div class="back">
+                    <img src="images/match_back.png" alt="">
+                </div>
+            </div>
+            <div class="card">
+                <div class="front">
+                    <img src="images/match_tifa.png" alt="">
+                </div>
+                <div class="back">
+                    <img src="images/match_back.png" alt="">
+                </div>
+            </div>
+            <div class="card">
+                <div class="front">
+                    <img src="images/match_yuna.png" alt="">
+                </div>
+                <div class="back">
+                    <img src="images/match_back.png" alt="">
+                </div>
+            </div>
+            <div class="card">
+                <div class="front">
+                    <img src="images/match_terra.png" alt="">
+                </div>
+                <div class="back">
+                    <img src="images/match_back.png" alt="">
+                </div>
+            </div>
+            <div class="card">
+                <div class="front">
+                    <img src="images/match_auron.png" alt="">
+                </div>
+                <div class="back">
+                    <img src="images/match_back.png" alt="">
+                </div>
+            </div>
+            <div class="card">
+                <div class="front">
+                    <img src="images/match_cloud.png" alt="">
+                </div>
+                <div class="back">
+                    <img src="images/match_back.png" alt="">
+                </div>
+            </div>
+            <div class="card">
+                <div class="front">
+                    <img src="images/match_kefca.png" alt="">
+                </div>
+                <div class="back">
+                    <img src="images/match_back.png" alt="">
+                </div>
+            </div>
+            <div class="card">
+                <div class="front">
+                    <img src="images/match_sephiroth.png" alt="">
+                </div>
+                <div class="back">
+                    <img src="images/match_back.png" alt="">
+                </div>
+            </div>
+            <div class="card">
+                <div class="front">
+                    <img src="images/match_squall.png" alt="">
+                </div>
+                <div class="back">
+                    <img src="images/match_back.png" alt="">
+                </div>
+            </div>
+            <div class="card">
+                <div class="front">
+                    <img src="images/match_tidus.png" alt="">
+                </div>
+                <div class="back">
+                    <img src="images/match_back.png" alt="">
+                </div>
+            </div>
+            <div class="card">
+                <div class="front">
+                    <img src="images/match_tifa.png" alt="">
+                </div>
+                <div class="back">
+                    <img src="images/match_back.png" alt="">
+                </div>
+            </div>
+            <div class="card">
+                <div class="front">
+                    <img src="images/match_yuna.png" alt="">
+                </div>
+                <div class="back">
+                    <img src="images/match_back.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>
