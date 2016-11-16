@@ -8,11 +8,19 @@ var match_counter = 0;
 
 $(document).ready(function () {
     $(".card").on("click",card_clicked);
+    $(".reset").click(resetBoard);
 });
+
+function resetBoard() {
+    $(".card").find(".back").show();
+    match_counter = 0;
+    first_card_clicked = null;
+    second_card_clicked = null;
+}
 
 function card_clicked(event) {
     //Toggle the back image since it's in front of the front one
-    $(this).find(".back").toggle();
+    $(this).find(".back").toggle("fast");
 
     if (first_card_clicked === null) {
         first_card_clicked = this;//Save this -  the card element
