@@ -25,15 +25,15 @@ header {
 }
 
 .stat-heading {
-    font-size: 5vw;
+    font-size: 2em;
 }
 
 .label {
-    font-size: 3.5vw;
+    font-size: 1em;
 }
 
 .value {
-    font-size: 2.5vw;
+    font-size: 1em;
 }
 
 img {
