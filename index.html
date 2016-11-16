@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <title>Memory Match</title>
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script src="http://learning-fuze.github.io/memory_match/v0.1/script.js"></script>
+    <!--<script src="http://learning-fuze.github.io/memory_match/v0.1/script.js"></script>-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -62,7 +64,7 @@
                     <img src="images/match_back.png" alt="">
                 </div>
             </div>
-            <div class="card">
+ <!--           <div class="card">
                 <div class="front">
                     <img src="images/match_cloud.png" alt="">
                 </div>
@@ -118,7 +120,7 @@
                     <img src="images/match_back.png" alt="">
                 </div>
             </div>
-            <div class="card">
+-->            <div class="card">
                 <div class="front">
                     <img src="images/match_terra.png" alt="">
                 </div>
@@ -134,7 +136,7 @@
                     <img src="images/match_back.png" alt="">
                 </div>
             </div>
-            <div class="card">
+<!--            <div class="card">
                 <div class="front">
                     <img src="images/match_cloud.png" alt="">
                 </div>
@@ -189,9 +191,21 @@
                 <div class="back">
                     <img src="images/match_back.png" alt="">
                 </div>
-            </div>
+            </div>-->
         </div>
     </div>
 </section>
+<div class="modal" id="modal-win">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <h1>You Win!</h1>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
