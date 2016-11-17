@@ -12,15 +12,21 @@ $(document).ready(function () {
 });
 
 function resetBoard() {
-    $(".card").find(".back").show();
+    $(".card").off();
+    $(".card").clearQueue();
+    $(".card").removeClass("flip").one("transitionend", function () {
+        $(".card").on("click",card_clicked);
+    });
     match_counter = 0;
     first_card_clicked = null;
     second_card_clicked = null;
 }
 
 function card_clicked(event) {
-    //Toggle the back image since it's in front of the front one
-    $(this).find(".back").toggle("fast");
+    //
+    $(this).addClass("flip");
+    //remove click handler since the card div triggered the click and can receive additional clicks
+    $(this).off();
 
     if (first_card_clicked === null) {
         first_card_clicked = this;//Save this -  the card element
@@ -44,13 +50,19 @@ function card_clicked(event) {
             //disable click handlers
             $(".card").off();
 
-            //Delay 2 secs - Show the back again - callback nulls vars and last reenables the handler
-            $(first_card_clicked).find(".back").delay(2000).toggle("fast","linear",function () {
+            //Delay 2 secs - show the back again - callback nulls vars and reenables the handler on transition end
+            $(first_card_clicked).delay(2000).queue(function (next) {
+                $(first_card_clicked).removeClass("flip");
                 first_card_clicked = null;
+                next();
             });
-            $(second_card_clicked).find(".back").delay(2000).toggle("fast","linear",function () {
+
+            $(second_card_clicked).delay(2000).queue(function (next) {
+                $(second_card_clicked).removeClass("flip").one("transitionend", function () {
+                    $(".card").on("click",card_clicked);
+                });
                 second_card_clicked = null;
-                $(".card").on("click",card_clicked);
+                next();
             });
         }
     }
