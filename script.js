@@ -31,46 +31,65 @@ function shuffle() {
 
 function resetBoard() {
     //clear queue if yet to flip - flip if necessary
-    if ($(".card").hasClass("flip")) {
-        $(".card").clearQueue();
-        $(".card").removeClass("flip").one("transitionend", function () {
-            //$(".card").on("click",card_clicked);
+    var cards = $(".card");
+    var flipping = false;
+    for (var i = 0; i < cards.length; i++) {
+        var card = $(cards[i]);
+        if (card.hasClass("flip")) {
+            card.clearQueue();
 
-        });
+            if (flipping) {
+                card.removeClass("flip");
+            } else {
+                //do once
+                card.removeClass("flip").one("transitionend", function () {
+                    first_card_clicked = null;
+                    second_card_clicked = null;
+                    shuffle();
+                });
+            }
+
+            flipping = true;
+        }
     }
-    shuffle();
 
-    //reset click handlers since I'm removing it on matched cards
+    if (!flipping) {
+        first_card_clicked = null;
+        second_card_clicked = null;
+        shuffle();
+    }
+
+    //reset click handlers since they're removed on matched cards
     $(".card").off("click").on("click",card_clicked);
 
-    //Reset vars
+    //reset stats
     match_counter = 0;
-    first_card_clicked = null;
-    second_card_clicked = null;
-
     games_played++;
     reset_stats();
 }
 
 function card_clicked(event) {
-    //
+    //If both cards have been selected - ignore further clicks until the variables have been reset
+    if(first_card_clicked !== null && second_card_clicked !== null) return;
+
     $(this).addClass("flip");
-    //remove click handler since the card div triggered the click and can receive additional clicks
+    //remove click handler - so clicks on the 1st and 2nd card are ignored - handler added if mismatch
     $(this).off("click");
 
     if (first_card_clicked === null) {
-        first_card_clicked = this;//Save this -  the card element
+        first_card_clicked = this;//var is the card element
     } else {
-        second_card_clicked = this;//Save this -  the card element
-        attempts++;
+        second_card_clicked = this;//var is the card element
 
         //compare img src strings
         var firstCard = $(first_card_clicked).find(".front img").attr("src");
         var secondCard = $(second_card_clicked).find(".front img").attr("src");
 
         if (firstCard === secondCard) {
+            //match
             match_counter++;
             matches++;
+
             first_card_clicked = null;
             second_card_clicked = null;
 
@@ -79,25 +98,30 @@ function card_clicked(event) {
                 $("#modal-win").modal();
             }
         } else {
-            //disable click handlers
-            $(".card").off("click");
+            //mismatch
 
-            //Delay 2 secs - flip back - callback nulls vars and re-enables the handler on transition end
+            //delay 2 secs - flip back - callback nulls vars and re-enables the handler on transition end
             $(first_card_clicked).delay(2000).queue(function (next) {
-                $(first_card_clicked).removeClass("flip");
-                first_card_clicked = null;
+                $(first_card_clicked).removeClass("flip").one("transitionend", function () {
+                    first_card_clicked = null;
+                });
                 next();
             });
+
+            $(first_card_clicked).on("click",card_clicked);
 
             $(second_card_clicked).delay(2000).queue(function (next) {
                 $(second_card_clicked).removeClass("flip").one("transitionend", function () {
-                    $(".card").on("click",card_clicked);
+                    second_card_clicked = null;
                 });
-                second_card_clicked = null;
                 next();
             });
+
+            $(second_card_clicked).on("click",card_clicked);
         }
 
+        //match attempted - update stats
+        attempts++;
         var percentage = Math.round((matches / attempts) * 100);
         accuracy = percentage;
 

@@ -14,33 +14,33 @@
 <header>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-xs-12 col-md-4 window top-bar">
-                <div class="row">
-                    <h1 id="game-title">FF Match</h1>
+            <div class="col-xs-12 col-md-4 window game-top-bar">
+                <div>
+                    <img id="game-title" src="images/match_logo.png" alt="logo">
                 </div>
-                <div class="row">
-                    <a href="#">Setting</a>
-                    <a href="about.html">About</a>
+                <div>
+                    <a class="text-large" href="#">Setting</a>
+                    <a class="text-large" href="about.html">About</a>
                 </div>
             </div>
-            <div class="col-xs-12 col-md-8 window top-bar" id="stats">
+            <div class="col-xs-12 col-md-8 window game-top-bar" id="stats">
                 <div class="row">
                     <div class="col-xs-4">
                         <div class="games-played">
-                            <h3 class="label">Games Played</h3>
-                            <p class="value"></p>
+                            <p class="label text-large">Games Played</p>
+                            <p class="value text-small"></p>
                         </div>
                     </div>
                     <div class="col-xs-4">
                         <div class="attempts">
-                            <h2 class="label">Attempts</h2>
-                            <p class="value"></p>
+                            <p class="label text-large">Attempts</p>
+                            <p class="value text-small"></p>
                         </div>
                     </div>
                     <div class="col-xs-4">
                         <div class="accuracy">
-                            <h3 class="label">Accuracy</h3>
-                            <p class="value"></p>
+                            <p class="label text-large">Accuracy</p>
+                            <p class="value text-small"></p>
                         </div>
                     </div>
                 </div>
@@ -48,7 +48,7 @@
         </div>
     </div>
 </header>
-<section class="game-window">
+<section id="game-window">
     <div class="window" id="game-area">
         <div class="card">
             <div class="front">
@@ -196,10 +196,10 @@
         </div>
     </div>
     <div id="reset-window" class="window">
-        <button class="reset btn btn-danger">Reset Game</button>
+        <button class="text-large reset btn btn-danger">Reset Game</button>
     </div>
 </section>
-<div class="modal" id="modal-win">
+<div class="modal" id="modal-window">
     <div class="modal-dialog">
         <div class="modal-content window">
             <div class="modal-header">

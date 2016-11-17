@@ -1,22 +1,79 @@
-
+/* match ff menu style */
 body {
     background-color: #000000;
+}
+
+@font-face {
+    font-family: "FFLarge";
+    src: url(fonts/ff7.ttf) format("truetype");
+}
+
+@font-face {
+    font-family: "FFSmall";
+    src: url(fonts/ff4.ttf) format("truetype");
+}
+
+.text-large {
+    font-family: "FFLarge",Arial,sans-serif;
+    font-size: 3em;
+    text-shadow: 0 0 1px #000000;
+}
+
+.text-small {
+    font-family: "FFSmall","Times New Roman",serif;
+    font-size: 2.5em;
+    text-shadow: 2px 2px #000000;
 }
 
 .window {
     background:linear-gradient(to bottom right, rgba(0, 0, 255, 0.9),#000021);
     color:#ffffff;
-    border: 6px ridge #ffffff;
+    border: 8px ridge #ffffff;
     border-radius: 10px;
 }
-
-.top-bar {
+/* top section */
+.game-top-bar {
     text-align: center;
-    height:150px;
+    height:110px;
 }
 
 #stats {
-    padding:1%;
+    padding:0;
+}
+
+.label {
+    padding:0;
+    margin:0;
+}
+
+.value {
+    padding:0;
+    margin:0;
+}
+
+#game-title {
+    height: 50px;
+    filter: invert(100%);
+    margin-top:4px;
+}
+
+#logo {
+    width:100px;
+    height:100px;
+    overflow:hidden;
+    padding:0;
+}
+
+#logo img {
+    width:100px;
+    height:150px;
+    position:relative;
+    bottom:25%;
+}
+
+/* Game  */
+#game-window {
+     position: relative;
 }
 
 #game-area {
@@ -27,16 +84,9 @@ body {
     align-content: flex-start;
 }
 
-.label {
+.reset {
     font-size: 2em;
-}
-
-.value {
-    font-size: 1em;
-}
-
-.game-window {
-    position: relative;
+    padding:0 4px;
 }
 
 #reset-window {
@@ -87,19 +137,7 @@ body {
     transform: rotateY(180deg);
 }
 
-#logo {
-    width:100px;
-    height:100px;
-    overflow:hidden;
-    padding:0;
-}
-
-#logo img {
-    width:100px;
-    height:150px;
-    position:relative;
-    bottom:25%;
-}
+/* modal win notification */
 
 .modal-content{
     text-align: center;
@@ -110,16 +148,10 @@ body {
     background-color: #ffffff;
     opacity: 0.8;
 }
-/* float over flow - parent element is clearfix class
-.clearfix:after {
-    content: " ";
-    display: block;
-    height: 0;
-    clear: both;
-}
-*/
 
-.me {
+/* about */
+
+.me-top-bar {
     display:flex;
     align-items: center;
     align-content: center;
@@ -147,18 +179,16 @@ body {
 a:link, a:visited  {
     color:#ffffff;
     text-decoration:none;
+    font-size:2em;
 }
 
 a:active {
     color:#00ffff;
     text-decoration:none;
+    font-size:2em;
 }
 
-a {
-    text-decoration: none;
-}
-
-.link-portfolio {
+.me-portfolio-link {
     font-size: 2em;
     font-weight: 400;
 }
