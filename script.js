@@ -9,11 +9,27 @@ var matches = 0;
 var attempts = 0;
 var accuracy = 0.0;
 var games_played = 0;
+var cursor = {
+    width:32,
+    height:26,
+    image:null,
+    currentTarget:null,
+};
+var timer = null;
 
 $(document).ready(function () {
     games_played = 0;
     $(".card").on("click",card_clicked);
     $(".reset").click(resetBoard);
+
+    $("#game-title").on("load",function () {
+        initPointer();
+    });
+
+    $(window).resize(function () {
+        onResize(500,updatePointer);
+    });
+
     shuffle();
     display_stats();
 });
@@ -30,6 +46,8 @@ function shuffle() {
 }
 
 function resetBoard() {
+    resetPointer();
+
     //clear queue if yet to flip - flip if necessary
     var cards = $(".card");
     var flipping = false;
@@ -72,9 +90,12 @@ function card_clicked(event) {
     //If both cards have been selected - ignore further clicks until the variables have been reset
     if(first_card_clicked !== null && second_card_clicked !== null) return;
 
-    $(this).addClass("flip");
+    var card = $(this);
+    pointTo(card);
+
+    card.addClass("flip");
     //remove click handler - so clicks on the 1st and 2nd card are ignored - handler added if mismatch
-    $(this).off("click");
+    card.off("click");
 
     if (first_card_clicked === null) {
         first_card_clicked = this;//var is the card element
@@ -93,9 +114,11 @@ function card_clicked(event) {
             first_card_clicked = null;
             second_card_clicked = null;
 
+            resetPointer();
+
             //Game won - calling modal to show you won
             if (match_counter === total_possible_matches) {
-                $("#modal-win").modal();
+                $("#modal-win").modal("show");
             }
         } else {
             //mismatch
@@ -111,6 +134,7 @@ function card_clicked(event) {
             $(first_card_clicked).on("click",card_clicked);
 
             $(second_card_clicked).delay(2000).queue(function (next) {
+                resetPointer();
                 $(second_card_clicked).removeClass("flip").one("transitionend", function () {
                     second_card_clicked = null;
                 });
@@ -141,3 +165,52 @@ function reset_stats() {
     attempts = 0;
     display_stats();
 }
+
+function initPointer () {
+    cursor.image = $("<img>",{
+        src:"images/match_cursor.png",
+        class:"pointer"
+    });
+
+    cursor.image.css({
+        "position":"absolute",
+    });
+
+    $("body").append(cursor.image);
+
+    resetPointer();
+}
+
+function pointTo(target) {
+    cursor.currentTarget = target;
+    var position = target.offset();
+    var centerY = position.top +(target.height() / 2);
+    var y = centerY - (cursor.height / 2);
+    var x = position.left - cursor.width;
+
+    cursor.image.css({
+        "position":"absolute",
+        "left":x +"px",
+        "top":y + "px",
+    });
+}
+
+function resetPointer() {
+    pointTo($("#game-title"));
+}
+
+function updatePointer() {
+    //console.log("Pointer updated");
+    pointTo(cursor.currentTarget);
+}
+
+function onResize(time, callback) {
+    //console.log("Resized setting timer");
+    if (timer != null) {
+        //console.log("Clearing timer");
+        clearTimeout(timer);
+    }
+
+    timer = setTimeout(callback,time);
+}
+

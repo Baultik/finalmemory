@@ -31,6 +31,20 @@ body {
     border: 8px ridge #ffffff;
     border-radius: 10px;
 }
+
+@keyframes cursor {
+    0%{margin-left: 0}
+    8%{margin-left:10px}
+    16%{margin-left:0px}
+}
+
+.pointer {
+    animation-name: cursor;
+    animation-duration: 1000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
 /* top section */
 .game-top-bar {
     text-align: center;
@@ -79,7 +93,7 @@ body {
 #game-area {
     display:flex;
     flex-wrap:wrap;
-    justify-content: space-around;
+    justify-content: flex-start;
     align-items: center;
     align-content: flex-start;
 }
@@ -87,12 +101,18 @@ body {
 .reset {
     font-size: 2em;
     padding:0 4px;
+    background:linear-gradient(to bottom right, rgba(0, 0, 255, 0.9),#000021);
+    border:none;
+}
+
+.reset:active {
+    background:linear-gradient(to bottom right, #7371ce,#000021);
 }
 
 #reset-window {
     position:absolute;
-    top:0;
-    left:0;
+    bottom:0;
+    right:0;
 }
 
 /* Cards */
@@ -101,7 +121,7 @@ body {
     position:relative;
     min-width:100px;
     min-height:150px;
-    margin: 2% 2%;
+    margin: 1.5% 1.5%;
     transition:transform 0.5s;
     transform-style: preserve-3d;
     border-radius:10px;
