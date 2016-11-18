@@ -16,7 +16,7 @@ body {
 .text-large {
     font-family: "FFLarge",Arial,sans-serif;
     font-size: 3em;
-    text-shadow: 0 0 1px #000000;
+    text-shadow: 0 0 3px #000000;
 }
 
 .text-small {
@@ -35,7 +35,7 @@ body {
 @keyframes cursor {
     0%{margin-left: 0}
     8%{margin-left:10px}
-    16%{margin-left:0px}
+    16%{margin-left:0}
 }
 
 .pointer {
@@ -199,13 +199,13 @@ body {
 a:link, a:visited  {
     color:#ffffff;
     text-decoration:none;
-    font-size:2em;
+    font-size: 2em;
 }
 
-a:active {
+a:active,a:hover {
     color:#00ffff;
     text-decoration:none;
-    font-size:2em;
+    font-size: 2em;
 }
 
 .me-portfolio-link {

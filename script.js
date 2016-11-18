@@ -189,7 +189,6 @@ function pointTo(target) {
     var x = position.left - cursor.width;
 
     cursor.image.css({
-        "position":"absolute",
         "left":x +"px",
         "top":y + "px",
     });
