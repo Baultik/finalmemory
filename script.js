@@ -92,7 +92,7 @@ function resetBoard() {
 function card_clicked(event) {
     //If both cards have been selected - ignore further clicks until the variables have been reset
     if(first_card_clicked !== null && second_card_clicked !== null) return;
-    console.log("Valid click");
+    //console.log("Valid click");
     var card = $(this);
     pointTo(card);
 
@@ -102,10 +102,10 @@ function card_clicked(event) {
 
     if (first_card_clicked === null) {
         first_card_clicked = this;//var is the card element
-        console.log("First card");
+        //console.log("First card");
     } else {
         second_card_clicked = this;//var is the card element
-        console.log("Second card");
+        //console.log("Second card");
         //compare img src strings
         var firstCard = $(first_card_clicked).find(".front img").attr("src");
         var secondCard = $(second_card_clicked).find(".front img").attr("src");
