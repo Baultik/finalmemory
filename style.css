@@ -95,7 +95,6 @@ body {
     flex-wrap:wrap;
     justify-content: flex-start;
     align-items: center;
-    align-content: flex-start;
 }
 
 .reset {
@@ -211,4 +210,10 @@ a:active,a:hover {
 .me-portfolio-link {
     font-size: 2em;
     font-weight: 400;
+}
+
+@media screen and (max-width: 600px) {
+    .text-large {
+        font-size: 2.5em;
+    }
 }

@@ -47,31 +47,34 @@ function shuffle() {
 
 function resetBoard() {
     resetPointer();
+    //console.log("Resetting...");
 
-    //clear queue if yet to flip - flip if necessary
-    var cards = $(".card");
+    var cards =$(".card.flip");
+    var last = $(".card.flip:last");
     var flipping = false;
+
     for (var i = 0; i < cards.length; i++) {
         var card = $(cards[i]);
-        if (card.hasClass("flip")) {
-            card.clearQueue();
+        card.clearQueue();
+        flipping = true;
 
-            if (flipping) {
-                card.removeClass("flip");
-            } else {
-                //do once
-                card.removeClass("flip").one("transitionend", function () {
-                    first_card_clicked = null;
-                    second_card_clicked = null;
-                    shuffle();
-                });
-            }
+        //console.log("flipping...");
 
-            flipping = true;
+        if (card[0] == last[0]) {
+            //do once on last card
+            card.removeClass("flip").one("transitionend", function () {
+                //console.log("Last card flipped - shuffling...");
+                first_card_clicked = null;
+                second_card_clicked = null;
+                shuffle();
+            });
+        } else {
+            card.removeClass("flip");
         }
     }
 
     if (!flipping) {
+        //console.log("no flipped cards");
         first_card_clicked = null;
         second_card_clicked = null;
         shuffle();
@@ -89,7 +92,7 @@ function resetBoard() {
 function card_clicked(event) {
     //If both cards have been selected - ignore further clicks until the variables have been reset
     if(first_card_clicked !== null && second_card_clicked !== null) return;
-
+    console.log("Valid click");
     var card = $(this);
     pointTo(card);
 
@@ -99,9 +102,10 @@ function card_clicked(event) {
 
     if (first_card_clicked === null) {
         first_card_clicked = this;//var is the card element
+        console.log("First card");
     } else {
         second_card_clicked = this;//var is the card element
-
+        console.log("Second card");
         //compare img src strings
         var firstCard = $(first_card_clicked).find(".front img").attr("src");
         var secondCard = $(second_card_clicked).find(".front img").attr("src");
@@ -110,7 +114,7 @@ function card_clicked(event) {
             //match
             match_counter++;
             matches++;
-
+            //console.log("Match");
             first_card_clicked = null;
             second_card_clicked = null;
 
@@ -122,11 +126,13 @@ function card_clicked(event) {
             }
         } else {
             //mismatch
-
+            //console.log("Mismatch");
             //delay 2 secs - flip back - callback nulls vars and re-enables the handler on transition end
             $(first_card_clicked).delay(2000).queue(function (next) {
+                //console.log("Card 1 delay end");
                 $(first_card_clicked).removeClass("flip").one("transitionend", function () {
                     first_card_clicked = null;
+                    //console.log("Card 1 done flipping");
                 });
                 next();
             });
@@ -134,9 +140,11 @@ function card_clicked(event) {
             $(first_card_clicked).on("click",card_clicked);
 
             $(second_card_clicked).delay(2000).queue(function (next) {
+                //console.log("Card 2 delay end");
                 resetPointer();
                 $(second_card_clicked).removeClass("flip").one("transitionend", function () {
                     second_card_clicked = null;
+                    //console.log("Card 2 done flipping");
                 });
                 next();
             });
@@ -182,6 +190,7 @@ function initPointer () {
 }
 
 function pointTo(target) {
+    //console.log("Point at:",target);
     cursor.currentTarget = target;
     var position = target.offset();
     var centerY = position.top +(target.height() / 2);
@@ -206,7 +215,6 @@ function updatePointer() {
 function onResize(time, callback) {
     //console.log("Resized setting timer");
     if (timer != null) {
-        //console.log("Clearing timer");
         clearTimeout(timer);
     }
 
