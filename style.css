@@ -14,7 +14,7 @@ body {
 }
 
 .text-large {
-    font-family: "FFLarge",Arial,sans-serif;
+    font-family: "FFLarge","Arial",sans-serif;
     font-size: 3em;
     text-shadow: 0 0 3px #000000;
 }
@@ -71,30 +71,17 @@ body {
     margin-top:4px;
 }
 
-#logo {
-    width:100px;
-    height:100px;
-    overflow:hidden;
-    padding:0;
-}
-
-#logo img {
-    width:100px;
-    height:150px;
-    position:relative;
-    bottom:25%;
-}
-
 /* Game  */
 #game-window {
      position: relative;
 }
 
 #game-area {
-    display:flex;
-    flex-wrap:wrap;
-    justify-content: flex-start;
-    align-items: center;
+    width:720px;
+    margin:auto;
+    /*display:flex;*/
+    /*flex-wrap:wrap;*/
+    /*justify-content: center;*/
 }
 
 .reset {
@@ -118,9 +105,9 @@ body {
 .card {
     display:inline-block;
     position:relative;
-    min-width:100px;
-    min-height:150px;
-    margin: 1.5% 1.5%;
+    width:100px;
+    height:150px;
+    margin: 10px 10px;
     transition:transform 0.5s;
     transform-style: preserve-3d;
     border-radius:10px;
@@ -212,8 +199,66 @@ a:active,a:hover {
     font-weight: 400;
 }
 
+@media screen and (max-width: 736px) {
+    #game-area {
+        width:600px;
+    }
+}
+
+@media screen and (max-width: 631px) {
+    #game-area {
+        width:480px;
+    }
+}
+
 @media screen and (max-width: 600px) {
     .text-large {
         font-size: 2.5em;
+    }
+}
+
+@media screen and (max-width: 511px) {
+    #game-area {
+        width:340px;
+    }
+
+    .card {
+        width:75px;
+        height:112px;
+        margin: 5px 5px;
+        border-radius:5px;
+    }
+
+    .card img {
+        width:75px;
+        height:112px;
+    }
+
+    .front, .back {
+        border-radius:5px;
+        overflow: hidden;
+    }
+}
+
+@media screen and (max-width: 391px) {
+    #game-area {
+        width:300px;
+    }
+
+    .card {
+        width:50px;
+        height:75px;
+        margin: 5px 5px;
+        border-radius:5px;
+    }
+
+    .card img {
+        width:50px;
+        height:75px;
+    }
+
+    .front, .back {
+        border-radius:5px;
+        overflow: hidden;
     }
 }

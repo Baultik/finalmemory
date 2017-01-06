@@ -1,14 +1,14 @@
 /**
  * Created by baultik on 11/15/16.
  */
-var first_card_clicked = null;
-var second_card_clicked = null;
-var total_possible_matches = 9;
-var match_counter = 0;
+var firstCardClicked = null;
+var secondCardClicked = null;
+var totalPossibleMatches = 9;
+var matchCounter = 0;
 var matches = 0;
 var attempts = 0;
 var accuracy = 0.0;
-var games_played = 0;
+var gamesPlayed = 0;
 var cursor = {
     width:32,
     height:26,
@@ -18,8 +18,8 @@ var cursor = {
 var timer = null;
 
 $(document).ready(function () {
-    games_played = 0;
-    $(".card").on("click",card_clicked);
+    gamesPlayed = 0;
+    $(".card").on("click",cardClicked);
     $(".reset").click(resetBoard);
 
     $("#game-title").on("load",function () {
@@ -31,7 +31,7 @@ $(document).ready(function () {
     });
 
     shuffle();
-    display_stats();
+    displayStats();
 });
 
 function shuffle() {
@@ -64,8 +64,8 @@ function resetBoard() {
             //do once on last card
             card.removeClass("flip").one("transitionend", function () {
                 //console.log("Last card flipped - shuffling...");
-                first_card_clicked = null;
-                second_card_clicked = null;
+                firstCardClicked = null;
+                secondCardClicked = null;
                 shuffle();
             });
         } else {
@@ -75,24 +75,24 @@ function resetBoard() {
 
     if (!flipping) {
         //console.log("no flipped cards");
-        first_card_clicked = null;
-        second_card_clicked = null;
+        firstCardClicked = null;
+        secondCardClicked = null;
         shuffle();
     }
 
     //reset click handlers since they're removed on matched cards
-    $(".card").off("click").on("click",card_clicked);
+    $(".card").off("click").on("click",cardClicked);
 
     //reset stats
-    match_counter = 0;
-    games_played++;
-    reset_stats();
+    matchCounter = 0;
+    gamesPlayed++;
+    resetStats();
 }
 
-function card_clicked(event) {
+function cardClicked(event) {
     //If both cards have been selected - ignore further clicks until the variables have been reset
-    if(first_card_clicked !== null && second_card_clicked !== null) return;
-    console.log("Valid click");
+    if(firstCardClicked !== null && secondCardClicked !== null) return;
+    //console.log("Valid click");
     var card = $(this);
     pointTo(card);
 
@@ -100,56 +100,56 @@ function card_clicked(event) {
     //remove click handler - so clicks on the 1st and 2nd card are ignored - handler added if mismatch
     card.off("click");
 
-    if (first_card_clicked === null) {
-        first_card_clicked = this;//var is the card element
-        console.log("First card");
+    if (firstCardClicked === null) {
+        firstCardClicked = this;//var is the card element
+        //console.log("First card");
     } else {
-        second_card_clicked = this;//var is the card element
-        console.log("Second card");
+        secondCardClicked = this;//var is the card element
+        //console.log("Second card");
         //compare img src strings
-        var firstCard = $(first_card_clicked).find(".front img").attr("src");
-        var secondCard = $(second_card_clicked).find(".front img").attr("src");
+        var firstCard = $(firstCardClicked).find(".front img").attr("src");
+        var secondCard = $(secondCardClicked).find(".front img").attr("src");
 
         if (firstCard === secondCard) {
             //match
-            match_counter++;
+            matchCounter++;
             matches++;
             //console.log("Match");
-            first_card_clicked = null;
-            second_card_clicked = null;
+            firstCardClicked = null;
+            secondCardClicked = null;
 
             resetPointer();
 
             //Game won - calling modal to show you won
-            if (match_counter === total_possible_matches) {
+            if (matchCounter === totalPossibleMatches) {
                 $("#modal-win").modal("show");
             }
         } else {
             //mismatch
             //console.log("Mismatch");
             //delay 2 secs - flip back - callback nulls vars and re-enables the handler on transition end
-            $(first_card_clicked).delay(2000).queue(function (next) {
+            $(firstCardClicked).delay(2000).queue(function (next) {
                 //console.log("Card 1 delay end");
-                $(first_card_clicked).removeClass("flip").one("transitionend", function () {
-                    first_card_clicked = null;
+                $(firstCardClicked).removeClass("flip").one("transitionend", function () {
+                    firstCardClicked = null;
                     //console.log("Card 1 done flipping");
                 });
                 next();
             });
 
-            $(first_card_clicked).on("click",card_clicked);
+            $(firstCardClicked).on("click",cardClicked);
 
-            $(second_card_clicked).delay(2000).queue(function (next) {
+            $(secondCardClicked).delay(2000).queue(function (next) {
                 //console.log("Card 2 delay end");
                 resetPointer();
-                $(second_card_clicked).removeClass("flip").one("transitionend", function () {
-                    second_card_clicked = null;
+                $(secondCardClicked).removeClass("flip").one("transitionend", function () {
+                    secondCardClicked = null;
                     //console.log("Card 2 done flipping");
                 });
                 next();
             });
 
-            $(second_card_clicked).on("click",card_clicked);
+            $(secondCardClicked).on("click",cardClicked);
         }
 
         //match attempted - update stats
@@ -157,21 +157,21 @@ function card_clicked(event) {
         var percentage = Math.round((matches / attempts) * 100);
         accuracy = percentage;
 
-        display_stats();
+        displayStats();
     }
 }
 
-function display_stats() {
-    $(".games-played .value").text(games_played);
+function displayStats() {
+    $(".games-played .value").text(gamesPlayed);
     $(".attempts .value").text(attempts);
     $(".accuracy .value").text("%"+accuracy);
 }
 
-function reset_stats() {
+function resetStats() {
     accuracy = 0;
     matches = 0;
     attempts = 0;
-    display_stats();
+    displayStats();
 }
 
 function initPointer () {
