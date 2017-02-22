@@ -1,6 +1,6 @@
 /* match ff menu style */
 body {
-    background-color: #000000;
+    background-color: #000;
 }
 
 @font-face {
@@ -51,6 +51,11 @@ body {
     height:110px;
 }
 
+.game-title-container {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
 #stats {
     padding:0;
 }
@@ -79,9 +84,6 @@ body {
 #game-area {
     width:720px;
     margin:auto;
-    /*display:flex;*/
-    /*flex-wrap:wrap;*/
-    /*justify-content: center;*/
 }
 
 .reset {
@@ -97,8 +99,8 @@ body {
 
 #reset-window {
     position:absolute;
-    bottom:0;
-    right:0;
+    bottom: -8px;
+    right: -8px;
 }
 
 /* Cards */
@@ -155,8 +157,22 @@ body {
     opacity: 0.8;
 }
 
-/* about */
+button.close {
+    padding: 2px 4px;
+    background: linear-gradient(to bottom right, rgba(0, 0, 255, 0.9),#000021);
+    border: 8px ridge #ffffff;
+    opacity: 1;
+    position: absolute;
+    float:none;
+    top:-8px;
+    right:-8px;
+}
 
+.close:focus, .close:hover {
+    opacity: 1;
+}
+
+/* about */
 .me-top-bar {
     display:flex;
     align-items: center;
